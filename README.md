@@ -11,6 +11,7 @@ Trier facilement les données de vos tableaux HTML
   - desc (string) : Classe CSS du span pour aucun tri décroissant
   - none (string) : Classe CSS du span pour aucun tri
   - color (string) : Couleur de l'icône
+- tooltip (boolean) : Mettre ou non des tooltips
 
 ## HTML
 Le tableau HTML doit obligatoirement contenu les balises `<thead/>` et `<tbody/>`.
