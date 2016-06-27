@@ -13,7 +13,8 @@
                 none : 'glyphicon glyphicon-sort',
                 color: '#909090'
             },
-            tooltip: true
+            tooltip: true,
+            refreshCallback: function(_selector) {}
         };
         o = $.extend(o, options);
 
@@ -54,6 +55,11 @@
             var $tr = {};
             $selector.find('tbody').find('tr').each(function(index, tr) {
                 var $td = $.trim($($(tr).find('td')[position]).text());
+
+                if($tr[$td] !== undefined) {
+                    $td = $td + ' ' + Math.random();
+                }
+
                 $tr[$td] = $(tr);
             });
 
@@ -85,8 +91,10 @@
                 $selector.find('tbody').append(tr);
             });
 
+
+            o.refreshCallback($selector);
             if(callback !== undefined) {
-                callback();
+                callback($selector);
             }
         };
 
