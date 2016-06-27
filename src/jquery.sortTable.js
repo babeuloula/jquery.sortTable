@@ -12,8 +12,8 @@
                 desc : 'glyphicon glyphicon-sort-by-attributes-alt',
                 none : 'glyphicon glyphicon-sort',
                 color: '#909090'
-            }
-
+            },
+            tooltip: true
         };
         o = $.extend(o, options);
 
@@ -73,10 +73,10 @@
                 keys.reverse();
             }
 
-            var $tr_sort = {};
+            var $tr_sort = [];
             for (var i = 0; i < length; i++) {
                 var k = keys[i];
-                $tr_sort[k] = $tr[k];
+                $tr_sort.push($tr[k]);
             }
 
 
@@ -105,11 +105,19 @@
             $($selector.find('thead').find('th')[value]).css({
                 cursor: 'pointer'
             }).append($span).on('click', sortDatas);
+
+            if(o.tooltip) {
+                $($selector.find('thead').find('th')[value]).html(
+                    $("<div/>").attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('title', "Trier par : " + $.trim($($selector.find('thead').find('th')[value]).text())).html($($selector.find('thead').find('th')[value]).html())
+                );
+            }
         });
 
         refreshDatas();
 
-
+        if(o.tooltip) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
 
         return {
             refresh: refreshDatas
